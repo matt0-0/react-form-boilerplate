@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Login from "./Login";
+import Register from "./Register";
 
 function App() {
+  const [view, setView] = useState("login");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {view === "login" ? <Login /> : <Register />}
+      <div className="fixed bottom-0 left-0 w-full bg-gray-200 p-4 text-center">
+        {view === "login" ? (
+          <p>
+            Don't have an account?{" "}
+            <span
+              className="text-blue-500 cursor-pointer"
+              onClick={() => setView("register")}
+            >
+              Create one
+            </span>
+          </p>
+        ) : (
+          <p>
+            Already have an account?{" "}
+            <span
+              className="text-blue-500 cursor-pointer"
+              onClick={() => setView("login")}
+            >
+              Login
+            </span>
+          </p>
+        )}
+      </div>
     </div>
   );
 }
